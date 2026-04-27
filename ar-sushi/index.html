@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi Academy AR | Descubre nuestro Ramen</title>
+    <!-- SEO & Meta Tags -->
+    <meta name="description" content="Visualiza en Realidad Aumentada los platos de nuestra academia y experimenta el sushi como nunca antes.">
+    
+    <!-- Fuentes modernas para un look premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Librería Model-Viewer de Google -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    
+    <!-- Nuestros estilos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Sushi Academy</h1>
+            <p>Visualiza nuestro plato estrella en tu propia mesa</p>
+        </header>
+
+        <div class="ar-container">
+            <!-- 
+                Aquí cargamos los modelos. 
+                NOTA: Debes crear una carpeta "modelos" y colocar ahí tus archivos ramen.glb y ramen.usdz.
+                
+                Parámetros extra para iOS (AR Quick Look):
+                Añadimos parámetros en ios-src para crear un banner inferior que lleve a la web de tu cliente.
+            -->
+            <model-viewer 
+                src="modelos/ramen.glb" 
+                ios-src="modelos/ramen.usdz#callToAction=Visitar%20Web&checkoutTitle=Sushi%20Academy&checkoutSubtitle=Descubre%20nuestros%20cursos"
+                alt="Un espectacular bol de ramen en 3D" 
+                ar 
+                ar-modes="scene-viewer quick-look" 
+                camera-controls 
+                auto-rotate
+                shadow-intensity="1.2"
+                environment-image="neutral"
+                exposure="1.1"
+                interaction-prompt="auto">
+                
+                <!-- Este botón sobrescribe el botón AR por defecto por uno mucho más estilizado -->
+                <button slot="ar-button" class="ar-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    Ver en mi mesa
+                </button>
+                
+                <!-- Pantalla de carga mientras se baja el 3D -->
+                <div slot="poster" class="poster">
+                    <div class="loader"></div>
+                </div>
+
+                <!-- Fallback en caso de error -->
+                <div id="ar-prompt">
+                    <img src="https://modelviewer.dev/shared-assets/icons/hand.png" alt="Desliza para rotar">
+                </div>
+            </model-viewer>
+        </div>
+
+        <footer>
+            <!-- Sustituye por la web de tu cliente -->
+            <a href="https://web-de-tu-cliente.com" class="client-link" target="_blank" rel="noopener">Descubrir más sobre nuestros cursos</a>
+        </footer>
+    </main>
+
+    <!-- Script opcional para manejar redes de error o analíticas -->
+    <script>
+        const modelViewer = document.querySelector('model-viewer');
+        
+        // Escuchamos si falla la apertura de AR
+        modelViewer.addEventListener('ar-status', (event) => {
+            if(event.detail.status === 'failed') {
+                console.error('El dispositivo falló al abrir AR');
+                // Aquí podrías redirigir: window.location.href = "https://web-de-tu-cliente.com";
+            }
+        });
+    </script>
+</body>
+</html>

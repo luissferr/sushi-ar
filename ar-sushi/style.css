@@ -1,0 +1,176 @@
+:root {
+    --bg-color: #0d0e12;
+    --text-color: #ffffff;
+    --accent-color: #ff4757;
+    --accent-glow: rgba(255, 71, 87, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Un fondo sutil dinámico */
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(255, 71, 87, 0.08), transparent 30%),
+        radial-gradient(circle at 85% 30%, rgba(46, 134, 255, 0.05), transparent 30%);
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+header {
+    text-align: center;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    /* Gradiente moderno en el texto */
+    background: linear-gradient(135deg, #ffffff 0%, #ff4757 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+header p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 300;
+}
+
+/* Contenedor del visor 3D (Efecto Glassmorphism) */
+.ar-container {
+    width: 100%;
+    height: 55vh;
+    min-height: 400px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: fadeInUp 1s ease-out;
+}
+
+model-viewer {
+    width: 100%;
+    height: 100%;
+    --poster-color: transparent;
+}
+
+/* Diseño del botón Flotante Premium */
+.ar-button {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 16px 32px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 25px var(--accent-glow);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    white-space: nowrap;
+}
+
+.ar-button:hover {
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 71, 87, 0.6);
+    background-color: #ff5e6d;
+}
+
+.ar-button:active {
+    transform: translateX(-50%) translateY(1px);
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.ar-button svg {
+    margin-top: -2px;
+}
+
+/* Enlace del footer */
+footer {
+    animation: fadeIn 1.2s ease-out;
+}
+
+.client-link {
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: color 0.3s ease;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+}
+
+.client-link:hover {
+    color: var(--text-color);
+    border-bottom-color: var(--text-color);
+}
+
+/* Spinner de carga para el 3D */
+.poster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--accent-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
